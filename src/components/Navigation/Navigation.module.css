@@ -1,0 +1,15 @@
+.navList {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}
+.navList a {
+  text-decoration: none;
+  color: inherit;
+}
+.navList a.active {
+  color: #f30000;
+  font-weight: bold;
+}

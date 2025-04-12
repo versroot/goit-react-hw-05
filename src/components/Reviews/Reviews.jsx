@@ -1,6 +1,7 @@
 import { getReviews } from "../js/fetch";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import css from "./Reviews.module.css";
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -22,15 +23,15 @@ export default function Reviews() {
   }, [movieId]);
 
   if (error) return <p>{error}</p>;
-  if (!reviews.length) return <p>No cast information found.</p>;
+  if (!reviews.length) return <p>No review information found.</p>;
 
   return (
     <div>
       <h1>Reviews</h1>
-      <ul>
+      <ul className={css.reviewsList}>
         {reviews.map(({ id, author, content }) => (
-          <li key={id}>
-            <p>Author: {author}</p>
+          <li key={id} className={css.reviewItem}>
+            <p className={css.author}>Author: {author}</p>
             <p>{content}</p>
           </li>
         ))}

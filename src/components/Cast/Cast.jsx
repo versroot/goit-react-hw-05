@@ -1,20 +1,25 @@
 import { getCredits } from "../js/fetch";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import css from "./Cast.module.css";
 
 export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getCast() {
       try {
+        setLoading(true);
         const castData = await getCredits(movieId);
         setCast(castData);
       } catch (err) {
         setError("Failed to load cast");
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -22,12 +27,12 @@ export default function Cast() {
   }, [movieId]);
 
   if (error) return <p>{error}</p>;
-  if (!cast.length) return <p>No cast information found.</p>;
+  if (!cast.length && !loading) return <p>No cast information found.</p>;
 
   return (
     <div>
       <h1>Cast</h1>
-      <ul>
+      <ul className={css.castList}>
         {cast.map(({ id, name, character, profile_path }) => (
           <li key={id}>
             {profile_path && (

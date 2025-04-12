@@ -51,3 +51,12 @@ export function getReviews(movieId) {
     })
     .then((data) => data.results || []);
 }
+
+export function getMovies(query) {
+  return fetch(`${API_URL}/search/movie?query=${query}`, options)
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to get movies");
+      return res.json();
+    })
+    .then((data) => data.results || []);
+}
