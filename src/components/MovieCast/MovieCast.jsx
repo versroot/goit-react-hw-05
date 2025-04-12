@@ -1,7 +1,7 @@
 import { getCredits } from "../js/fetch";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import css from "./Cast.module.css";
+import css from "./MovieCast.module.css";
 
 export default function Cast() {
   const { movieId } = useParams();
